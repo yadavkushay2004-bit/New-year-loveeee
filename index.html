@@ -1,0 +1,243 @@
+<!<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year Ashmita ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== BACKGROUND ===== */
+body{
+  margin:0;
+  overflow:hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg,#7a1c4b,#ff8fb1);
+  color:white;
+}
+
+/* ===== CLOUDS ===== */
+.cloud{
+  position:absolute;
+  top:20px;
+  width:200px;
+  height:60px;
+  background:#fff;
+  border-radius:50px;
+  opacity:0.7;
+  animation:moveCloud 40s linear infinite;
+}
+.cloud::before,.cloud::after{
+  content:'';
+  position:absolute;
+  background:#fff;
+  width:100px;
+  height:80px;
+  border-radius:50%;
+  top:-30px;
+}
+.cloud::before{ left:30px;}
+.cloud::after{ right:30px;}
+@keyframes moveCloud{
+  from{left:-250px;}
+  to{left:110%;}
+}
+
+/* ===== RAIN / HEART / ROSE ===== */
+.drop{
+  position:absolute;
+  top:-50px;
+  animation:fall linear infinite;
+  font-size:18px;
+}
+@keyframes fall{
+  to{transform:translateY(110vh);}
+}
+
+/* ===== BUTTERFLY ===== */
+.butterfly{
+  position:absolute;
+  font-size:22px;
+  animation:fly 12s linear infinite;
+}
+@keyframes fly{
+  0%{transform:translate(-10vw,80vh);}
+  100%{transform:translate(110vw,-10vh);}
+}
+
+/* ===== CARD ===== */
+.card{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#b8326a;
+  padding:25px;
+  border-radius:22px;
+  max-width:360px;
+  text-align:center;
+  box-shadow:0 0 25px rgba(0,0,0,0.4);
+}
+
+button{
+  border:none;
+  padding:12px 20px;
+  border-radius:25px;
+  margin:10px;
+  font-size:15px;
+  cursor:pointer;
+  background:white;
+  color:#b8326a;
+  font-weight:bold;
+}
+
+/* ===== SURPRISE BOX ===== */
+.box{
+  width:120px;
+  height:120px;
+  background:#ff5c8a;
+  margin:20px auto;
+  border-radius:15px;
+  font-size:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+/* ===== FIREWORK ===== */
+.fire{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:yellow;
+  border-radius:50%;
+  animation:explode 1s linear forwards;
+}
+@keyframes explode{
+  to{
+    transform:translate(var(--x),var(--y));
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- CLOUDS -->
+<div class="cloud" style="top:40px;"></div>
+<div class="cloud" style="top:100px; animation-duration:55s;"></div>
+
+<!-- MAIN CARD -->
+<div class="card" id="card">
+  <h2>✨ Happy New Year ✨</h2>
+  <h3>Ashmita ❤️ Kushay</h3>
+  <p>Tap to begin the magic 💖</p>
+  <button onclick="next()">Tap to Open</button>
+</div>
+
+<script>
+/* ===== FALLING EFFECT ===== */
+setInterval(()=>{
+  let d=document.createElement("div");
+  d.className="drop";
+  d.style.left=Math.random()*100+"vw";
+  d.style.animationDuration=2+Math.random()*3+"s";
+  d.innerHTML=Math.random()>0.5?"💖":"🌹";
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),5000);
+},300);
+
+/* ===== BUTTERFLY ===== */
+setInterval(()=>{
+  let b=document.createElement("div");
+  b.className="butterfly";
+  b.style.top=Math.random()*80+"vh";
+  b.innerHTML="🦋";
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),12000);
+},4000);
+
+/* ===== QUESTIONS ===== */
+let step=0;
+const card=document.getElementById("card");
+
+function next(){
+step++;
+
+if(step===1){
+card.innerHTML=`
+<h3>Q1 💌</h3>
+<p>Do you believe we were meant to meet?</p>
+<button onclick="next()">Yes ❤️</button>
+<button onclick="next()">Absolutely 💕</button>`;
+}
+
+else if(step===2){
+card.innerHTML=`
+<h3>Q2 🌸</h3>
+<p>Mai tumse milne aunga to mujhe cheese momo khilaogi🥹?</p>
+<button onclick="next()">Mujhe cheese momo ni psnd 🥲</button>
+<button onclick="next()">Yess baby 😘</button>`;
+}
+
+else if(step===3){
+card.innerHTML=`
+<h3>Q3 ✨</h3>
+<p>How do I make you feel?</p>
+<button onclick="next()">Loved 💖</button>
+<button onclick="next()">Safe 🤗</button>`;
+}
+
+else if(step===4){
+card.innerHTML=`
+<h3>Q4 🥰</h3>
+<p>What do you want from me always?</p>
+<button onclick="next()">Honesty 🌹</button>
+<button onclick="next()">Forever love 💞</button>`;
+}
+
+else if(step===5){
+card.innerHTML=`
+<h3>Q5 💫</h3>
+<p>Will you walk with me into every New Year?</p>
+<button onclick="next()">Yes 🤞</button>
+<button onclick="next()">Always ♾️</button>`;
+}
+
+else{
+card.innerHTML=`
+<h2>🎁 Surprise</h2>
+<div class="box" onclick="openBox()">🎁</div>
+<p>Tap the box</p>`;
+}
+}
+
+/* ===== SURPRISE ===== */
+function openBox(){
+card.innerHTML=`
+<h2 style="font-size:26px;">I ❤️ YOU</h2>
+<p style="font-weight:bold;">
+Ashmita, you are my magic, my rain, my rainbow that brings colors in my life 🌈<br>
+Forever yours — Kushuu 🤭❤️
+</p>`;
+fireworks();
+}
+
+/* ===== FIREWORK ===== */
+function fireworks(){
+for(let i=0;i<40;i++){
+let f=document.createElement("div");
+f.className="fire";
+f.style.left="50vw";
+f.style.top="50vh";
+f.style.setProperty("--x",(Math.random()*300-150)+"px");
+f.style.setProperty("--y",(Math.random()*300-150)+"px");
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),1000);
+}
+}
+</script>
+
+</body>
+</html>
